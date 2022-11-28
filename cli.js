@@ -32,13 +32,13 @@ if(arg.n === undefined && arg.s === undefined){
 
 const latitude = arg.latitude;
 
-if(args.w === undefined && args.e === undefined){
+if(arg.w === undefined && arg.e === undefined){
     console.log("Longitude must be in range");
     process.exit(0);
-}else if (args.w !== undefined && args.e === undefined){
-    arg.longitude = -args.w;
-}else if (args.w === undefined && args.e !== undefined){
-    arg.longitude = -args.e;
+}else if (arg.w !== undefined && arg.e === undefined){
+    arg.longitude = arg.w;
+}else if (arg.w === undefined && arg.e !== undefined){
+    arg.longitude = -arg.e;
 }else{
     console.log("Longitude must be in range");
     process.exit(0);
@@ -52,7 +52,7 @@ if (arg.z === undefined){
 
 const timezone = arg.z;
 
-const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation_probability,wind_speed_10m,wind_from_direction_10m&timezone=${timezone}`);
+const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude="+latitude+"&longitude="+longitude+"&daily=precipitation_hours&timezone="+timezone);
 const data = await response.json();
 
 if (arg.j !== undefined){
@@ -64,15 +64,15 @@ if (arg.d === undefined){
     arg.d = 1;
 }
 
-const day = arg.d;
+const days = arg.d;
 
 process.stdout.write("You will ");
 
-if(data.daily.precipitation_hours[days] === 0){
+if(data.daily.precipitation_hours[days] === 0.0){
     process.stdout.write("not ");
 }
 
-process.stdout.write("need your galoshes today ")
+process.stdout.write("need your galoshes ")
 
 if (days === 0) {
     console.log("today.")
