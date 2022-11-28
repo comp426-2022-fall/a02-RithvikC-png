@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "\"galo.sh cli\"",
-  "main": "cli.js",
+  "main": "index.js",
   "scripts": {
     "test": "node cli.js -n 35.92 -w 79.05 -z America/New_York"
   },
@@ -17,6 +17,9 @@
     "url": "https://github.com/comp426-2022-fall/a02-RithvikC-png/issues"
   },
   "homepage": "https://github.com/comp426-2022-fall/a02-RithvikC-png#readme",
+  "bin": {
+    "galosh.js": "cli.js"
+  },
   "dependencies": {
     "minimist": "^1.2.7",
     "moment-timezone": "^0.5.39",
